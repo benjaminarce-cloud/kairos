@@ -19,12 +19,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           >
             Dashboard
           </Link>
-          <Link
-            href="/connect"
-            className="transition-colors hover:text-[#F5F1EA]"
-          >
-            Connect
-          </Link>
         </nav>
       </header>
       {children}

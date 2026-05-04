@@ -1,42 +1,22 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
 import { CanvasClient } from "@/lib/canvas/client";
-import { decryptToken } from "@/lib/crypto/tokens";
-import { createClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 
-const syncCanvasSchema = z.object({
-  canvasBaseUrl: z.string().url(),
-  encryptedToken: z.string().min(1),
-});
+export async function POST() {
+  const baseUrl = process.env.CANVAS_BASE_URL;
+  const token = process.env.CANVAS_API_TOKEN;
 
-export async function POST(request: Request) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
+  if (!baseUrl || !token) {
     return NextResponse.json(
-      { error: "Authentication required." },
-      { status: 401 },
-    );
-  }
-
-  const parsed = syncCanvasSchema.safeParse(await request.json());
-
-  if (!parsed.success) {
-    return NextResponse.json(
-      { error: "Canvas URL and encrypted token are required." },
-      { status: 400 },
+      { error: "Canvas environment variables are required." },
+      { status: 500 },
     );
   }
 
   try {
-    const token = decryptToken(parsed.data.encryptedToken);
     const client = new CanvasClient({
-      baseUrl: parsed.data.canvasBaseUrl,
+      baseUrl,
       token,
     });
     const result = await client.sync();

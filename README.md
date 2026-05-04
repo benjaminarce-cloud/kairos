@@ -1,12 +1,11 @@
 # Kairos
 
-Kairos is a Next.js 15 App Router project for Canvas-connected assignment drafting.
+Personal Canvas assistant. Reads my Canvas, helps me draft, I submit manually.
 
 ## Stack
 
 - Next.js 15, App Router, TypeScript strict mode
 - Tailwind CSS v4
-- Supabase auth with `@supabase/ssr`
 - Anthropic SDK
 - shadcn/ui primitives: Button, Input, Card, Dialog
 - Lucide, date-fns, zod, framer-motion
@@ -25,23 +24,15 @@ pnpm install
 cp .env.example .env.local
 ```
 
-3. Generate a token encryption key:
+3. Add the required values:
 
 ```bash
-openssl rand -hex 32
-```
-
-4. Add the required values:
-
-```bash
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
 ANTHROPIC_API_KEY=
-TOKEN_ENCRYPTION_KEY=
+CANVAS_API_TOKEN=
+CANVAS_BASE_URL=https://your-school.instructure.com/api/v1
 ```
 
-5. Start development:
+4. Start development:
 
 ```bash
 pnpm dev

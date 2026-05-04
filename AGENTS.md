@@ -16,6 +16,7 @@
 
 ## Build Defaults
 
+- Treat Kairos as a single-user personal tool; do not add account management.
 - Keep edits scoped and lightweight.
 - Preserve typed contracts and strict TypeScript.
 - Use shadcn/ui primitives only for Button, Input, Card, and Dialog unless explicitly expanded.

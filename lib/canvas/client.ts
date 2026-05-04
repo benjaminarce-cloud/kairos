@@ -15,7 +15,7 @@ export class CanvasClient {
   private readonly token: string;
 
   constructor({ baseUrl, token }: CanvasClientOptions) {
-    this.baseUrl = baseUrl.replace(/\/$/, "");
+    this.baseUrl = baseUrl.replace(/\/api\/v1\/?$/, "").replace(/\/$/, "");
     this.token = token;
   }
 
