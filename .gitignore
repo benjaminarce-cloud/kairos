@@ -4,5 +4,6 @@ dist
 out
 .env
 .env*.local
+.data/
 *.tsbuildinfo
 pnpm-debug.log*
